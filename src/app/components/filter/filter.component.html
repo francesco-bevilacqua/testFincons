@@ -1,0 +1,40 @@
+<div class="divContainerFilter">
+  <div class="divSubFilter1">
+  <div class="divInput ">
+    <label class="labelForm">First Name</label>
+  <input [(ngModel)]="filter.firstName" (ngModelChange)="changeFilter($event,'firstName')" class="form-control ml-2" type="text" />
+  </div>
+  <div class="divInput ">
+    <label class="labelForm">Last Name</label>
+ <input [(ngModel)]="filter.lastName" (ngModelChange)="changeFilter($event,'lastName')" class="form-control ml-2" type="text" />
+  </div>
+  </div>
+  <div class="divSubFilter2">
+    <div class="divInput ">
+      <label class="labelForm">Gender</label>
+    <div class="col">
+      <div ngbDropdown class="d-inline-block">
+        <button class="btn btn-outline-dark" id="dropdownBasic1" ngbDropdownToggle>{{filter.gender}}</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button (click)="changeFilter('All','gender')" ngbDropdownItem>All</button>
+          <button (click)="changeFilter('Male','gender')" ngbDropdownItem>Male</button>
+          <button (click)="changeFilter('Female','gender')" ngbDropdownItem>Female</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="divInput">
+    <label class="labelForm">Active</label>
+    <div class="col">
+      <div ngbDropdown class="d-inline-block">
+        <button class="btn btn-outline-dark" id="dropdownBasic2" ngbDropdownToggle>{{filter.active}}</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button (click)="changeFilter('All','active')" ngbDropdownItem>All</button>
+          <button (click)="changeFilter('Active','active')" ngbDropdownItem>Active</button>
+          <button (click)="changeFilter('Inactive','active')" ngbDropdownItem>Inactive</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

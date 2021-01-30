@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.css';
+.ngx-pagination > .current {
+  background: #e6e6e6!important;
+  color: black;
+}
+.ngx-pagination .current{
+  background-color: #e6e6e6!important;
+  color: black !important;
+}
+.ngx-pagination a:hover{
+  background: #e6e6e6!important;
+  color: black !important;
+}

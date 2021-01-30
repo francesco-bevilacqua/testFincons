@@ -1,0 +1,8 @@
+.containerApp{
+  margin: 2rem;
+  min-width: 540px;
+  min-height: 900px;
+}
+* {
+  font-family: Roboto;
+}

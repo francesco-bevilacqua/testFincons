@@ -1,0 +1,10 @@
+.headerContainer{
+  background-color: black;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+.headerImg{
+  height: 40px;
+  margin: 6px;
+}

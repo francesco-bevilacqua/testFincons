@@ -1,0 +1,25 @@
+<table class="table table-bordered">
+  <thead height="7">
+  <tr class="trTitle">
+    <th (click)="col.sortable?onSort(col.sortable,col.key):{}" [style.cursor]="col.sortable?'pointer':'default'" height="5" class="thCustom " sortable="name" *ngFor="let col of colsTable;" scope="col"><div class="divCellTableIconAndButton"  ><img class="iconSort" *ngIf="col.sortable" [src]="getIconSort(col.sortable)" >{{col.title}}</div></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of users | paginate: paginationConfig ; index as i">
+    <td><div class="divCellTableIconAndButton" >  <img class="avatarImgInTable" [src]="user.avatar?user.avatar:'../../../assets/icon/iconTable/customAvatar.svg'" alt="" ></div></td>
+    <td><div class="divCellTableText" >{{user.firstName}}</div></td>
+    <td><div class="divCellTableText" >{{user.lastName}}</div></td>
+    <td><div class="divCellTableText" >{{user.gender}}</div></td>
+    <td><div class="divCellTableText" ><div [ngClass]="user.isActive?'stickerVerde':'stickerRosso'"></div>{{user.isActive?'yes':'no'}}</div></td>
+    <td><div class="divCellTableText" >{{user.birthday*1000| date:'dd MMM yyyy'}}</div></td>
+    <td><div class="divCellTableIconAndButton" > <button (click)="openDetailModal('id',user)" class="btn btn-outline-success buttonDetail" id="dropdownBasic1">Detail</button>
+    </div></td>
+  </tr>
+  </tbody>
+</table>
+<div class="paginationDiv">
+<div class="d-flex justify-content-between p-2">
+  <pagination-controls  (pageChange)="changePage($event)"  [previousLabel]=""
+                       [nextLabel]=""  responsive="true" directionLinks="true" autoHide="true" ></pagination-controls>
+</div>
+</div>

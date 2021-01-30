@@ -1,0 +1,12 @@
+{
+  "labels": {
+    "firstName": "FirstName",
+    "lastName": "LastName",
+    "email": "Email",
+    "gender": "Gender",
+    "birthday": "Birthday",
+    "mac": "mac",
+    "ip": "ip",
+    "browser": "browser"
+  }
+}

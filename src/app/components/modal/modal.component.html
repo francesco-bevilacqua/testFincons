@@ -1,0 +1,27 @@
+  <div  [ngClass]="{divModalOn:showModalFlag,divModalOff:!showModalFlag}">
+  <div class="divIconModal">
+    <img  [src]="userDetail['avatar']?userDetail['avatar']:'../../../assets/icon/iconTable/customAvatar.svg'" class="imgIconModal">
+  </div>
+  <div class="divContainerModal">
+    <div>
+      <p>Detail</p>
+      <div class="divLabelModalInfo" ><div class="labelModalInfo">First Name: </div> {{userDetail["firstName"]}}</div>
+      <div class="divLabelModalInfo" ><div class="labelModalInfo">Last Name: </div>  {{userDetail["lastName"]}}</div>
+      <div class="divLabelModalInfo" ><div class="labelModalInfo">Email: </div>  {{userDetail["email"]}}</div>
+      <div class="divLabelModalInfo"><div class="labelModalInfo">Gender: </div>  {{userDetail["gender"]}}</div>
+      <div class="divLabelModalInfo" ><div class="labelModalInfo">Birthday: </div>  {{userDetail["birthday"]*1000 | date:'d MMM yyyy'}}</div>
+      <div class="divLabelModalInfo" ><div class="labelModalInfo">Active: </div>  {{userDetail["isActive"]?'yes':'no'}}</div>
+
+    </div>
+    <div>
+      <p>Acces</p>
+      <div class="divLabelModalInfo" ><div class="labelModalInfo">mac: </div> {{userDetail["lastAccess"]["mac"]}}</div>
+      <div class="divLabelModalInfo"><div class="labelModalInfo">ip: </div>  {{userDetail["lastAccess"]["ip"]}}</div>
+      <div class="divLabelModalInfo"><div class="labelModalInfo">browser: </div>  {{userDetail["lastAccess"]["browser"]}}</div>
+    </div>
+  </div>
+  <div class="divNoteModal">{{userDetail["desctiption"]}}</div>
+  <div class="divButtonClose"><button type="button" class="btn btn-outline gray buttonClose" aria-label="Close" (click)="activeModal.dismiss('Cross click')">Close</button></div>
+  </div>
+
+

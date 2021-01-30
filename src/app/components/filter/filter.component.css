@@ -1,0 +1,53 @@
+.labelForm{margin-left: 20px !important;}
+
+.divInput{
+  margin-right: 1rem;
+  width: 200px;
+  min-width: 200px;
+}
+.dropdown-toggle {
+  width: 200px !important;
+}
+.ngbdropdownitem{
+  width: 200px !important;
+}
+.divContainerFilter{
+  display: flex; flex-direction: row;
+  padding-bottom: 10px;
+}
+.form-control {
+  background-color: #191d21 !important;
+}
+.btn-outline-dark{
+  color:#dee2e6 ;
+}
+.dropdown-menu {
+  width: 200px;
+}
+.form-control:focus {
+  border-color:#dee2e6 !important;
+  box-shadow: 0 0 0 0.1rem #dee2e6 !important;
+}
+.divSubFilter1{
+  display: flex;
+  flex-direction: row;
+}
+.divSubFilter2{
+  display: flex;
+  flex-direction: row;
+}
+@media (max-width: 950px){
+  .divSubFilter1{
+    display: flex;
+    flex-direction: column;
+  }
+  .divSubFilter2{
+    display: flex;
+    flex-direction: column;
+  }
+  .divContainerFilter{
+    display: flex; flex-direction: row;
+    justify-content: center;
+    padding-bottom: 10px;
+  }
+}

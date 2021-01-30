@@ -1,0 +1,88 @@
+.paginationDiv{
+  display: flex;
+  justify-content: flex-end;
+}
+.thCustom{
+  background-color: black;
+}
+.trTitle{
+  line-height: 14px;
+}
+.divCellTableText{
+  display: flex;
+  align-content: center;
+  justify-content: start;
+}
+.divCellTableIconAndButton{
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+.buttonDetail{
+  border-radius: 20px !important;
+  border-color: #2CAD96 !important;
+  color: #2CAD96 !important;
+}
+.buttonDetail:not(:disabled):not(.disabled):active{
+  background-color: #2CAD96 !important;;
+  color: #ced4da !important;
+}
+.buttonDetail:hover{
+  background-color: #2CAD96 !important;
+  color: #ced4da !important;
+}
+.buttonDetail:focus{
+  box-shadow: 0 0 0 0.1rem #2CAD96 !important;
+  color: #ced4da !important;
+}
+
+.stickerRosso {
+  width: 16px;
+  height: 16px;
+  background-color: #FF0000;
+  border-radius: 85%;
+  border: 2px solid #FF0000;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+.stickerVerde {
+  width: 16px;
+  height: 16px;
+  background-color: #0cf549;
+  border-radius: 85%;
+  border: 2px solid #0cf549;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+.avatarImgInTable{
+ width: 30px;
+}
+
+.iconSort{
+  padding-right: 5px;
+}
+
+a:not([href]):not([class]):hover{
+  color: black !important;
+}
+.bootstrap-dark a:not([href]):hover {
+  color: black !important;
+}
+.bootstrap-dark a:hover{
+  color: black;
+}
+
+
+.text-center {
+  text-align: center;
+}
+
+.list {
+  max-width: 550px;
+  margin: auto;
+}
+
+li {
+  margin-bottom: 5px;
+}
