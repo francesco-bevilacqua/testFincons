@@ -7,7 +7,10 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build-start-prod": "ng build --prod && http-server dist/Test",
+    "start-prod": "http-server dist/Test"
+
   },
   "private": true,
   "dependencies": {

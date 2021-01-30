@@ -11,8 +11,8 @@ import {Utils} from '../../../utils/Utils';
 export class ModalComponent implements OnInit {
   @Input() src;
   @Input() userId: {};
-  userDetail: {};
-  userDetailFormatted: {};
+  userDetail: any = {lastAccess:{}};
+  userDetailFormatted: any = {};
   showModalFlag = false;
   constructor(public activeModal: NgbActiveModal, private userService: UserService) { }
 
@@ -21,7 +21,7 @@ export class ModalComponent implements OnInit {
     this.userService.recuperaUserDetail(this.userId).then(data => {
       this.userDetail = data;
       this.userDetailFormatted = data;
-      this.userDetailFormatted["lastAccess"]["browser"] = Utils.getParsedUAString(this.userDetailFormatted["lastAccess"]["userAgent"]);
+      this.userDetailFormatted.lastAccess.browser = Utils.getParsedUAString(this.userDetailFormatted.lastAccess.userAgent);
       this.showModalFlag = true;
     });
   }

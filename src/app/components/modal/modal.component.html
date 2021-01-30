@@ -1,6 +1,6 @@
   <div  [ngClass]="{divModalOn:showModalFlag,divModalOff:!showModalFlag}">
   <div class="divIconModal">
-    <img  [src]="userDetail['avatar']?userDetail['avatar']:'../../../assets/icon/iconTable/customAvatar.svg'" class="imgIconModal">
+    <img  [src]="userDetail && userDetail['avatar']?userDetail['avatar']:'../../../assets/icon/iconTable/customAvatar.svg'" class="imgIconModal">
   </div>
   <div class="divContainerModal">
     <div>
