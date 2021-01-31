@@ -30,11 +30,11 @@ export class TableComponent implements OnInit, OnChanges {
     itemsPerPage: 20,
     totalItems: this.users.length
   };
-
+  sortColumn = 'firstName';
   ngOnInit(): void {
   }
   ngOnChanges(changes: SimpleChanges): void {
-    this.sortingTable('firstName');
+    this.sortingTable(this.sortColumn);
   }
 
   renderCell(user, key): any {
@@ -84,6 +84,7 @@ export class TableComponent implements OnInit, OnChanges {
           }
         }
       });
+       this.sortColumn = key;
        this.sortingTable(key);
   }
 
