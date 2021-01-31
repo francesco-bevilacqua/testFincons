@@ -2,6 +2,8 @@ import {Component, Directive, EventEmitter, Input, OnChanges, OnInit, Output, Si
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../modal/modal.component';
 import * as moment from 'moment';
+import {Utils} from '../../../utils/Utils';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-table',
@@ -12,7 +14,7 @@ export class TableComponent implements OnInit, OnChanges {
   // tslint:disable-next-line:no-input-rename
   @Input('users') users = [];
 
-  constructor(public modalService: NgbModal) {  }
+  constructor(public modalService: NgbModal, private userService: UserService) {  }
   colsTable =  [
     { key: 'avatar', title: 'AVATAR'},
     { key: 'firstName', title: 'First Name', sortable: 'none'},
@@ -42,9 +44,19 @@ export class TableComponent implements OnInit, OnChanges {
     this.paginationConfig.currentPage = newPage;
   }
   openDetailModal(link, user): void{
-    const modalRef = this.modalService.open(ModalComponent, {centered: true});
-    modalRef.componentInstance.src = link;
-    modalRef.componentInstance.userId = user.id;
+
+    let userDetailFormatted;
+
+    this.userService.recuperaUserDetail(user.id).then(data => {
+      userDetailFormatted = data;
+      userDetailFormatted.lastAccess.browser = Utils.getParsedUAString(userDetailFormatted.lastAccess.userAgent);
+      const modalRef = this.modalService.open(ModalComponent, {centered: true});
+      modalRef.componentInstance.src = link;
+      modalRef.componentInstance.userId = user.id;
+      modalRef.componentInstance.userDetail = userDetailFormatted;
+    }).catch(e => {
+      console.log('errore lettura dettaglio', e);
+    });
 
   }
 
@@ -52,16 +64,19 @@ export class TableComponent implements OnInit, OnChanges {
   onSort(sortable, key) {
        this.colsTable.filter(col => col.sortable).forEach(col => {
         if (col.key === key){
-          if (sortable === 'none' || sortable === 'desc')
+          if (sortable === 'none' || sortable === 'desc') {
             col.sortable = 'asc';
-          else if (sortable === 'asc')
+          }
+          else if (sortable === 'asc') {
             col.sortable = 'desc';
+ }
         }else{
-          if(col.sortable)
+          if (col.sortable) {
             col.sortable = 'none';
+          }
         }
       });
-    this.sortingTable();
+       this.sortingTable();
   }
 
   getIconSort(sortable) {
@@ -72,34 +87,35 @@ export class TableComponent implements OnInit, OnChanges {
       }
       else if (sortable === 'asc'){
         res = '../../../assets/icon/iconTable/arrow-up.svg';
-      }else if (sortable === 'none')
+      }else if (sortable === 'none') {
         res = '../../../assets/icon/iconTable/arrow-down-up.svg';
+ }
     }
     return res;
   }
 
    sortingTable() {
-    let fieldSort=this.colsTable.filter(x=>x.sortable&&x.sortable!='none');
-     if(fieldSort.length>0)
+    const fieldSort = this.colsTable.filter(x => x.sortable && x.sortable != 'none');
+    if (fieldSort.length > 0)
      {
-       let sortColumn=fieldSort[0].key;
-       let sortDirection=fieldSort[0].sortable;
+       const sortColumn = fieldSort[0].key;
+       const sortDirection = fieldSort[0].sortable;
        function compare( a, b, sortColumn, sortDirection ) {
-         let tempA,tempB;
+         let tempA, tempB;
          if (sortColumn === 'birthday')
          {
-           tempA  = moment.unix(a[sortColumn]).format("YYYY/MM/DD");
-           tempB = moment.unix(b[sortColumn]).format("YYYY/MM/DD");
+           tempA  = moment.unix(a[sortColumn]).format('YYYY/MM/DD');
+           tempB = moment.unix(b[sortColumn]).format('YYYY/MM/DD');
          }else{
            tempA = a[sortColumn];
            tempB = b[sortColumn];
          }
-       if (sortDirection === "asc") {
+         if (sortDirection === 'asc') {
          return tempA.toLowerCase() > tempB.toLowerCase()  ? 1 : -1;
-       } else if (sortDirection === "desc") {
+       } else if (sortDirection === 'desc') {
          return tempA.toLowerCase()  < tempB.toLowerCase()  ? 1 : -1;
        }
-       return  0;
+         return  0;
        }
 
        this.users.sort((a, b) => compare(a, b, sortColumn, sortDirection ));
