@@ -6,7 +6,7 @@
   </thead>
   <tbody>
   <tr *ngFor="let user of users | paginate: paginationConfig ; index as i">
-    <td><div class="divCellTableIconAndButton" >  <img class="avatarImgInTable" [src]="user.avatar?user.avatar:'../../../assets/icon/iconTable/customAvatar.svg'" alt="" ></div></td>
+    <td><div class="divCellTableIconAndButton" >  <img class="avatarImgInTable" [src]="user.avatar?user.avatar:'/assets/icon/iconTable/customAvatar.svg'" alt="" ></div></td>
     <td><div class="divCellTableText" >{{user.firstName}}</div></td>
     <td><div class="divCellTableText" >{{user.lastName}}</div></td>
     <td><div class="divCellTableText" >{{user.gender}}</div></td>
@@ -19,7 +19,7 @@
 </table>
 <div class="paginationDiv">
 <div class="d-flex justify-content-between p-2">
-  <pagination-controls  (pageChange)="changePage($event)"  [previousLabel]=""
-                       [nextLabel]=""  responsive="true" directionLinks="true" autoHide="true" ></pagination-controls>
+  <pagination-controls  (pageChange)="changePage($event)"  [previousLabel]="''"
+                       [nextLabel]="''"  responsive="true" directionLinks="true" autoHide="true" ></pagination-controls>
 </div>
 </div>

@@ -9,21 +9,13 @@ import {Utils} from '../../../utils/Utils';
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponent implements OnInit {
-  @Input() src;
   @Input() userId: {};
   @Input() userDetail: any ;
   userDetailFormatted: any = {};
-  showModalFlag = false;
   constructor(public activeModal: NgbActiveModal, private userService: UserService) { }
 
   // tslint:disable-next-line:typedef
   ngOnInit() {
   }
 
-
-
-  // tslint:disable-next-line:typedef
-  showModal() {
-    this.showModalFlag = (Object.keys(this.userDetail).length === 0 && this.userDetail.constructor === Object);
-  }
 }

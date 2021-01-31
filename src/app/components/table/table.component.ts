@@ -50,17 +50,23 @@ export class TableComponent implements OnInit, OnChanges {
     this.userService.recuperaUserDetail(user.id).then(data => {
       userDetailFormatted = data;
       userDetailFormatted.lastAccess.browser = Utils.getParsedUAString(userDetailFormatted.lastAccess.userAgent);
-      const modalRef = this.modalService.open(ModalComponent, {centered: true});
-      modalRef.componentInstance.src = link;
-      modalRef.componentInstance.userId = user.id;
-      modalRef.componentInstance.userDetail = userDetailFormatted;
+      this.openModalFromService(link, userDetailFormatted);
     }).catch(e => {
       console.log('errore lettura dettaglio', e);
+      this.openModalFromService(link, user);
     });
 
   }
 
   // tslint:disable-next-line:typedef
+  openModalFromService(link, user) {
+    const modalRef = this.modalService.open(ModalComponent, {centered: true});
+    modalRef.componentInstance.src = link;
+    modalRef.componentInstance.userId = user.id;
+    modalRef.componentInstance.userDetail = user;
+  }
+
+// tslint:disable-next-line:typedef
   onSort(sortable, key) {
        this.colsTable.filter(col => col.sortable).forEach(col => {
         if (col.key === key){
@@ -79,16 +85,17 @@ export class TableComponent implements OnInit, OnChanges {
        this.sortingTable();
   }
 
+  // tslint:disable-next-line:typedef
   getIconSort(sortable) {
     let res = '';
     if (sortable){
       if (sortable === 'desc') {
-        res = '../../../assets/icon/iconTable/arrow-down.svg';
+        res = '/assets/icon/iconTable/arrow-down.svg';
       }
       else if (sortable === 'asc'){
-        res = '../../../assets/icon/iconTable/arrow-up.svg';
+        res = '/assets/icon/iconTable/arrow-up.svg';
       }else if (sortable === 'none') {
-        res = '../../../assets/icon/iconTable/arrow-down-up.svg';
+        res = '/assets/icon/iconTable/arrow-down-up.svg';
  }
     }
     return res;
