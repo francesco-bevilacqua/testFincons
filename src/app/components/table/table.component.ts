@@ -34,7 +34,7 @@ export class TableComponent implements OnInit, OnChanges {
   ngOnInit(): void {
   }
   ngOnChanges(changes: SimpleChanges): void {
-    this.sortingTable();
+    this.sortingTable('firstName');
   }
 
   renderCell(user, key): any {
@@ -70,19 +70,21 @@ export class TableComponent implements OnInit, OnChanges {
   onSort(sortable, key) {
        this.colsTable.filter(col => col.sortable).forEach(col => {
         if (col.key === key){
-          if (sortable === 'none' || sortable === 'desc') {
+          if (sortable === 'none' ) {
             col.sortable = 'asc';
           }
           else if (sortable === 'asc') {
             col.sortable = 'desc';
- }
+        }else if ( sortable === 'desc')
+            col.sortable = 'none';
+
         }else{
           if (col.sortable) {
             col.sortable = 'none';
           }
         }
       });
-       this.sortingTable();
+       this.sortingTable(key);
   }
 
   // tslint:disable-next-line:typedef
@@ -101,30 +103,37 @@ export class TableComponent implements OnInit, OnChanges {
     return res;
   }
 
-   sortingTable() {
-    const fieldSort = this.colsTable.filter(x => x.sortable && x.sortable != 'none');
+   sortingTable(key) {
+    const fieldSort = this.colsTable.filter(x => x.key === key);
     if (fieldSort.length > 0)
      {
-       const sortColumn = fieldSort[0].key;
-       const sortDirection = fieldSort[0].sortable;
+       let sortColumn = fieldSort[0].key;
+       let sortDirection = fieldSort[0].sortable;
+       if(sortDirection === 'none') {
+         sortColumn = 'id';
+         sortDirection = 'asc';
+       }
        function compare( a, b, sortColumn, sortDirection ) {
          let tempA, tempB;
          if (sortColumn === 'birthday')
          {
            tempA  = moment.unix(a[sortColumn]).format('YYYY/MM/DD');
            tempB = moment.unix(b[sortColumn]).format('YYYY/MM/DD');
-         }else{
+         }else if (sortColumn === 'id'){
            tempA = a[sortColumn];
            tempB = b[sortColumn];
+         }else{
+           tempA = a[sortColumn].toLowerCase();
+           tempB = b[sortColumn].toLowerCase();
          }
          if (sortDirection === 'asc') {
-         return tempA.toLowerCase() > tempB.toLowerCase()  ? 1 : -1;
+         return tempA > tempB  ? 1 : -1;
        } else if (sortDirection === 'desc') {
-         return tempA.toLowerCase()  < tempB.toLowerCase()  ? 1 : -1;
+         return tempA < tempB ? 1 : -1;
        }
          return  0;
        }
-
+       if(this.users && this.users.length>0)
        this.users.sort((a, b) => compare(a, b, sortColumn, sortDirection ));
      }
   }
